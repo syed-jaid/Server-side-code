@@ -24,11 +24,25 @@ async function run() {
 
         // getting the user task data
         app.get('/Task', async (req, res) => {
-            // const query =(emai:email)
-            const result = await TASK_Collection.find().toArray();
+            const email = req.query.email;
+            const query = { email: email };
+            const result = await TASK_Collection.find(query).toArray();
             res.send(result);
         })
 
+        // deleteing the user task data
+        app.put('/Task/:id', async (req, res) => {
+            const id = req.params
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: {
+                    done: `done`
+                },
+            };
+            const result = await TASK_Collection.updateOne(filter, updateDoc, options);
+            res.send(result);
+        })
         // deleteing the user task data
         app.delete('/Task/:id', async (req, res) => {
             const id = req.params
