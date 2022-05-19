@@ -3,10 +3,10 @@ const app = express()
 const cors = require('cors');
 require('dotenv').config()
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const port = process.env.PROT || 5000
+const port = process.env.PROT || 5000;
 
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cors());
 
 const uri = `mongodb+srv://${process.env.BD_NAME}:${process.env.BD_PASS}@finalproject.4pehg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -54,8 +54,6 @@ async function run() {
     } finally {
         //   await client.close();
     }
-
-
 
 }
 run().catch(console.dir);
