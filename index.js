@@ -3,7 +3,7 @@ const app = express()
 const cors = require('cors');
 require('dotenv').config()
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const port = process.env.PROT || 5000;
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
@@ -25,6 +25,7 @@ async function run() {
         // getting the user task data
         app.get('/Task', async (req, res) => {
             const email = req.query.email;
+            console.log(email)
             const query = { email: email };
             const result = await TASK_Collection.find(query).toArray();
             res.send(result);
@@ -52,7 +53,7 @@ async function run() {
         })
 
     } finally {
-        //   await client.close();
+        // await client.close();
     }
 
 }
